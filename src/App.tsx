@@ -1,8 +1,13 @@
 import React from "react";
 import Layout from "@/components/layout";
+import Routes from "./routes";
 
 const App: React.FC = () => {
-  return <Layout>Content</Layout>;
+  return (
+    <Layout>
+      <Routes />
+    </Layout>
+  );
 };
 
 export default App;
