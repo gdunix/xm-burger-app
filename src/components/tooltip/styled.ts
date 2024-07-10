@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 
 export const TooltipWrapper = styled.div`
-  background-color: #ff6600;
+  background-color: ${props => props.theme.colors.primary};
   padding: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
