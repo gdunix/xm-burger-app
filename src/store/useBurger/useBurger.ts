@@ -7,9 +7,11 @@ type State = {
   burger: Ingredient[];
   addIngredient: (ingredient: Ingredient) => void;
   removeIngredient: (uniqueId: string) => void;
+  getBurger: () => Ingredient[];
+  getIngredientCount: (id: number) => number;
 };
 
-const useBurgerStore = create<State>()((set) => ({
+const useBurgerStore = create<State>()((set, get) => ({
   burger: [],
   addIngredient: (ingredient: Ingredient) =>
     set((state) => ({ burger: U.addIngredient(state.burger, ingredient) })),
@@ -17,6 +19,9 @@ const useBurgerStore = create<State>()((set) => ({
     set((state) => ({
       burger: U.removeIngredient(state.burger, uniqueId),
     })),
+  getBurger: () => U.getUniqueIngredients(get().burger),
+  getIngredientCount: (id: number) => U.getIngredientCount(get().burger, id),
 }));
 
+export const selectBurger = (state: State) => state.burger;
 export default createSelectors(useBurgerStore);
