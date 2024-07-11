@@ -9,7 +9,7 @@ const Button = styled.button`
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: ${props => props.theme.fontSizes.medium};
 `;
 
 export default Button;

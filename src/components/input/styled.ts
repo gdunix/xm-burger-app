@@ -12,13 +12,11 @@ export const Input = styled.input`
   padding: 10px 8px;
   border: 1px solid #ccc;
   border-radius: 3px;
-  font-size: 16px;
+  font-size: ${(props) => props.theme.fontSizes.medium};
   outline: none;
   transition: all 0.3s ease-in-out;
 `;
 
 export const Label = styled.label`
-  color: #ccc;
-  pointer-events: none;
-  transition: all 0.3s ease-in-out;
+  color: ${props => props.theme.colors.primary};
 `;

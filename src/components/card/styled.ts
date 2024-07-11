@@ -17,7 +17,7 @@ export const Container = styled.div`
   }
   @media ${device.md} {
     margin: 0;
-    padding: 32px 32px 48px 32px;
+    padding: 16px 32px 48px 32px;
   }
 `;
 

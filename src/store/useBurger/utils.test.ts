@@ -1,5 +1,5 @@
 import { Ingredient } from "@/types";
-import * as U from './utils';
+import * as U from "./utils";
 
 describe("Burger functions", () => {
   let initialBurger: Ingredient[];
@@ -37,8 +37,8 @@ describe("Burger functions", () => {
       const updatedBurger = U.addIngredient(initialBurger, newIngredient);
 
       expect(updatedBurger.length).toBe(4);
-      expect(updatedBurger[0].name).toBe("cheese");
-      expect(updatedBurger[0].uniqueId).toBe("cheese-1");
+      expect(updatedBurger[3].name).toBe("cheese");
+      expect(updatedBurger[3].uniqueId).toBe("cheese-1");
     });
 
     it("should add another instance of an existing ingredient with a unique ID", () => {
@@ -50,8 +50,8 @@ describe("Burger functions", () => {
       const updatedBurger = U.addIngredient(initialBurger, existingIngredient);
 
       expect(updatedBurger.length).toBe(4);
-      expect(updatedBurger[0].name).toBe("burger patty");
-      expect(updatedBurger[0].uniqueId).toBe("burger-patty-2");
+      expect(updatedBurger[3].name).toBe("burger patty");
+      expect(updatedBurger[3].uniqueId).toBe("burger-patty-2");
     });
   });
 
@@ -102,6 +102,25 @@ describe("Burger functions", () => {
       const countUnknownIngredient = U.getIngredientCount(initialBurger, 4);
 
       expect(countUnknownIngredient).toBe(0);
+    });
+  });
+
+  describe("getCost", () => {
+    it("should return 0 when the burger is empty", () => {
+      const emptyBurger: Ingredient[] = [];
+      expect(U.getCost(emptyBurger)).toBe(0);
+    });
+
+    it("should return 2.5 for a burger with one ingredient", () => {
+      const oneIngredientBurger: Ingredient[] = [
+        {
+          id: 1,
+          src: "burger-patty.png",
+          name: "burger patty",
+          uniqueId: "burger-patty-1",
+        },
+      ];
+      expect(U.getCost(oneIngredientBurger)).toBe(2.5);
     });
   });
 });
