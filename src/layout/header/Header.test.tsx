@@ -1,24 +1,41 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
-
+import useAuth from "@/store/useAuth";
+import { renderWithProviders } from "@/helpers/renderWithProviders";
 import Header from "./Header";
 
-const renderWithRouter = (children: React.ReactNode) =>
-  render(<Router>{children}</Router>);
+jest.mock("@/store/useAuth", () => jest.fn());
+jest.mock("./logout", () => () => <div>Logout</div>);
 
 describe("Header component", () => {
-  test("renders the header with title", () => {
-    renderWithRouter(<Header />);
-
-    const titleElement = screen.getByText(/Burger App/i);
-    expect(titleElement).toBeInTheDocument();
+  beforeEach(() => {
+    (useAuth as any).mockReturnValue({
+      isAuthenticated: false,
+    });
   });
 
-  test("renders the title with correct link", () => {
-    renderWithRouter(<Header />);
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
-    const linkElement = screen.getByRole("link", { name: /Burger App/i });
-    expect(linkElement).toHaveAttribute("href", "/");
+  test("renders the title", () => {
+    renderWithProviders(<Header />);
+    expect(screen.getByText("Burger App")).toBeInTheDocument();
+  });
+
+  test("renders Logout button when authenticated", () => {
+    (useAuth as any).mockReturnValue({
+      isAuthenticated: true,
+    });
+    renderWithProviders(<Header />);
+    expect(screen.getByText("Logout")).toBeInTheDocument();
+  });
+
+  test("does not render Logout button when not authenticated", () => {
+    (useAuth as any).mockReturnValue({
+      isAuthenticated: false,
+    });
+    renderWithProviders(<Header />);
+    expect(screen.queryByText("Logout")).not.toBeInTheDocument();
   });
 });

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import "@testing-library/jest-dom";
 
-import Layout from ".";
+import Layout from "./Layout";
 
 jest.mock("./header", () => () => <div data-testid="header">Header</div>);
 
@@ -17,11 +17,9 @@ describe("Header component", () => {
       </Layout>
     );
 
-    // Check for the Header component
     const headerElement = screen.getByTestId("header");
     expect(headerElement).toBeInTheDocument();
 
-    // Check for the children content
     const childrenElement = screen.getByText(/Test Content/i);
     expect(childrenElement).toBeInTheDocument();
   });

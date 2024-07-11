@@ -8,10 +8,7 @@ jest.mock("react-router-dom", () => ({
   useNavigate: jest.fn(),
 }));
 
-jest.mock("@/store/useAuth", () => ({
-  __esModule: true,
-  default: jest.fn(),
-}));
+jest.mock("@/store/useAuth", () => jest.fn());
 
 jest.mock("@/reactQuery/users", () => ({
   useLogin: jest.fn(),

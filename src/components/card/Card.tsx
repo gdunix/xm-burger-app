@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Title, Content } from "./styled";
+import { Wrapper, Title, Content } from "./styled";
 
 type Props = {
   title: string;
@@ -7,10 +7,10 @@ type Props = {
 };
 
 const Card: React.FC<Props> = ({ title, children }) => (
-  <Container>
+  <Wrapper>
     <Title>{title}</Title>
     <Content>{children}</Content>
-  </Container>
+  </Wrapper>
 );
 
 export default Card;

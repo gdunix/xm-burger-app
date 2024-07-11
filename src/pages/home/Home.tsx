@@ -1,13 +1,13 @@
 import React from "react";
 import Loader from "@/components/loader";
+import Card from "@/components/card";
 import { Wrapper } from "./styled";
 import useIngredients from "./useIngredients";
 import List from "./list";
 import Burger from "./burger";
-import Card from "@/components/card";
 import Cost from "./cost";
 
-const Ingredients: React.FC = () => {
+const Home: React.FC = () => {
   const { data, isLoading } = useIngredients();
   return (
     <Card title="Make your Burger">
@@ -21,4 +21,4 @@ const Ingredients: React.FC = () => {
   );
 };
 
-export default Ingredients;
+export default Home;

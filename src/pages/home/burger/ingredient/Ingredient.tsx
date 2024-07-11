@@ -5,7 +5,6 @@ import useBurger from "@/store/useBurger";
 import { Button, Info, Content } from "./styled";
 import BurgerImg from "../../components/burgerImg";
 
-
 const Ingredient: React.FC<IngredientType> = ({
   id,
   uniqueId = "",

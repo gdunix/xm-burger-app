@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import device from "@/styles/device";
 
-export const Container = styled.div`
+export const Wrapper = styled.div`
   background-color: #fff;
   border: ${(props) => `1px solid ${props.theme.colors.primary}`};
   border-radius: 8px;

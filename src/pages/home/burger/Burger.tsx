@@ -1,6 +1,6 @@
 import React from "react";
 import { Ingredient as IngredientType } from "@/types";
-import useBurger from "@/store/useBurger/useBurger";
+import useBurger from "@/store/useBurger";
 import { Wrapper, Content } from "./styled";
 import { TopBun, BottomBun } from "../components/buns";
 import Ingredient from "./ingredient";
