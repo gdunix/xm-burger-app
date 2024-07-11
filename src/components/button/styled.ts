@@ -10,10 +10,6 @@ const Button = styled.button`
   transition: all 0.3s ease-in-out;
   margin-top: 20px;
   font-size: 14px;
-
-  &:hover {
-    background-color: #c0c0c0;
-  }
 `;
 
 export default Button;

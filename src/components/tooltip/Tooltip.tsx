@@ -7,16 +7,18 @@ type Props = {
 };
 
 const Tooltip: React.FC<Props> = ({ children, text }) => {
-  const [show, setShow] = useState(false);
+  const [visible, setIsVisible] = useState(false);
 
-  const handleMouseEnter = () => setShow(true);
-  const handleMouseLeave = () => setShow(false);
+  const handleMouseEnter = () => setIsVisible(true);
+  const handleMouseLeave = () => setIsVisible(false);
+
+  TooltipWrapper.shouldForwardProp = (prop: any) => prop !== "visible";
 
   return (
     <Wrapper onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       {children}
-      {show && (
-        <TooltipWrapper className={show ? 'show' : ''}>
+      {visible && (
+        <TooltipWrapper visible={visible}>
           <Text>{text}</Text>
         </TooltipWrapper>
       )}

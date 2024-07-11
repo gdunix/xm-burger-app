@@ -22,13 +22,17 @@ export const removeIngredient = (
   burger.filter((ingredient: Ingredient) => ingredient.uniqueId !== uniqueId);
 
 export const getUniqueIngredients = (burger: Ingredient[]): Ingredient[] =>
-  burger.reduce(
-    (acc: Ingredient[], curr: Ingredient) =>
-      !!acc.find(({ id }: { id: number }) => id === curr.id)
-        ? acc
-        : [curr, ...acc],
-    []
-  );
+  burger
+    .reduce(
+      (acc: Ingredient[], curr: Ingredient) =>
+        !!acc.find(({ id }: { id: number }) => id === curr.id)
+          ? acc
+          : [...acc, curr],
+      []
+    )
+    .reverse();
 
 export const getIngredientCount = (burger: Ingredient[], id: number): number =>
   burger.filter((ingredient: Ingredient) => ingredient.id === id)?.length ?? 0;
+
+export const getCost = (burger: Ingredient[]): number => burger.length * 2.5;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes as RouterRoutes, Route } from "react-router-dom";
 import Login from "@/pages/login";
-import Ingredients from "@/pages/ingredients";
+import Home from "@/pages/home";
 import Protected from "./protected";
 
 const Routes: React.FC = () => (
@@ -11,7 +11,7 @@ const Routes: React.FC = () => (
       path="/"
       element={
         <Protected>
-          <Ingredients />
+          <Home />
         </Protected>
       }
     />
