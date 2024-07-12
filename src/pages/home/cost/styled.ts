@@ -14,6 +14,8 @@ export const Text = styled.div`
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   font-size: ${(props) => props.theme.fontSizes.medium};
   padding: 16px;
+  text-align: center;
+  width: 300px;
   @media ${device.md} {
     font-size: ${(props) => props.theme.fontSizes.large};
   }

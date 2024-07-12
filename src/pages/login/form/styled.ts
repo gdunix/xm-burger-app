@@ -13,5 +13,11 @@ export const Wrapper = styled.form`
 `;
 
 export const ErrorMsg = styled.div`
-  color: ${props => props.theme.colors.primary};
+  color: ${(props) => props.theme.colors.primary};
+  margin-top: 10px;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 4px;
+  width: 100%;
+  text-align: center;
 `;
