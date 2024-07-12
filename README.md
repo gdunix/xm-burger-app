@@ -12,11 +12,11 @@ To get started with XM Burger App, follow these steps:
    git clone https://github.com/gdunix/xm-burger-app
    cd xm-burger-app
 
-2. Install dependencies
+2. Install dependencies:
    npm install
 
-3. Run development server
+3. Run development server:
    npm run dev (runs on port 5050)
 
-4. Run tests
+4. Run tests:
    npm run test
