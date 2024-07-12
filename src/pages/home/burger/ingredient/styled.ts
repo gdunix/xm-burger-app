@@ -19,7 +19,7 @@ export const Info = styled.div`
   position: absolute;
   top: 20px;
   right: -20px;
-  width: 50px;
+  width: 60px;
   border: ${(props) => `1px solid ${props.theme.colors.primary}`};
   border-radius: 8px;
   padding: 4px;
