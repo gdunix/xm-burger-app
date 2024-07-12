@@ -10,7 +10,7 @@ const useLogin = () => {
   const [form, setForm] = useState<LoginType>({ name: "", password: "" });
   const [error, setError] = useState<string>("");
 
-  const { mutate } = users.useLogin({
+  const { mutate, isPending } = users.useLogin({
     onSuccess: (response: any) => {
       setError("");
       const token = response?.data?.token;
@@ -22,7 +22,14 @@ const useLogin = () => {
     },
   });
 
-  return { form, error, setForm, mutate };
+  return {
+    form,
+    setForm,
+    error,
+    setError,
+    login: () => mutate(form),
+    isPending,
+  };
 };
 
 export default useLogin;

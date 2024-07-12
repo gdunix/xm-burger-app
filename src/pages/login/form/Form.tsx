@@ -1,18 +1,20 @@
 import React from "react";
 import Input from "@/components/input";
 import Button from "@/components/button";
+import Loader from "@/components/loader";
 import { Wrapper, ErrorMsg } from "./styled";
 import useLogin from "./useLogin";
 
 const Form: React.FC = () => {
-  const { error, form, setForm, mutate } = useLogin();
+  const { error, setError, form, setForm, login, isPending } = useLogin();
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value });
   };
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    mutate(form);
+    setError("");
+    login();
   };
   return (
     <Wrapper onSubmit={onSubmit}>
@@ -33,7 +35,10 @@ const Form: React.FC = () => {
         onChange={onChange}
         required
       />
-      <Button type="submit">Login</Button>
+      <Button type="submit" disabled={isPending}>
+        Login
+      </Button>
+      {isPending && <Loader />}
       {!!error && <ErrorMsg role="alert">{error}</ErrorMsg>}
     </Wrapper>
   );

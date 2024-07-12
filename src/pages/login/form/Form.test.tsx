@@ -20,17 +20,20 @@ jest.mock(
 jest.mock("@/components/button", () => ({ children }: { children: any }) => (
   <button type="submit">{children}</button>
 ));
+jest.mock("@/components/loader", () => () => <div data-testid="loader" />);
 
 describe("Form component", () => {
   const mockSetForm = jest.fn();
-  const mockMutate = jest.fn();
+  const mockSetError = jest.fn();
+  const mockLogin = jest.fn();
 
   beforeEach(() => {
     (useLogin as jest.Mock).mockReturnValue({
       error: "",
+      setError: mockSetError,
       form: { name: "", password: "" },
       setForm: mockSetForm,
-      mutate: mockMutate,
+      login: mockLogin,
     });
   });
 
@@ -46,12 +49,25 @@ describe("Form component", () => {
     expect(screen.getByRole("button", { name: /login/i })).toBeInTheDocument();
   });
 
+  test("displays loader when isPending", () => {
+    (useLogin as jest.Mock).mockReturnValue({
+      isPending: true,
+      form: { name: "", password: "" },
+      login: mockLogin,
+    });
+
+    renderWithTheme(<Form />);
+
+    expect(screen.getByTestId('loader')).toBeInTheDocument();;
+  });
+
   test("displays error message when error exists", () => {
     (useLogin as jest.Mock).mockReturnValue({
       error: "Invalid credentials",
+      setError: mockSetError,
       form: { name: "", password: "" },
       setForm: mockSetForm,
-      mutate: mockMutate,
+      login: mockLogin,
     });
 
     renderWithTheme(<Form />);

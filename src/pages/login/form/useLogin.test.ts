@@ -22,7 +22,10 @@ describe("useLogin", () => {
   beforeEach(() => {
     (useAuth as unknown as jest.Mock).mockReturnValue({ login: mockLogin });
     (useNavigate as jest.Mock).mockReturnValue(mockNavigate);
-    (users.useLogin as jest.Mock).mockReturnValue({ mutate: mockMutate });
+    (users.useLogin as jest.Mock).mockReturnValue({
+      mutate: mockMutate,
+      isPending: false,
+    });
   });
 
   afterEach(() => {
@@ -46,5 +49,41 @@ describe("useLogin", () => {
       name: "testname",
       password: "testpassword",
     });
+  });
+
+  test("should handle successful login", async () => {
+    const response = { data: { token: "token" } };
+
+    (users.useLogin as jest.Mock).mockImplementation(({ onSuccess }) => ({
+      mutate: () => onSuccess(response),
+      isPending: false,
+    }));
+
+    const { result } = renderHook(() => useLogin());
+
+    await act(async () => {
+      result.current.login();
+    });
+
+    expect(mockLogin).toHaveBeenCalledWith("token");
+    expect(mockNavigate).toHaveBeenCalledWith("/");
+    expect(result.current.error).toBe("");
+  });
+
+  test("should handle login error", async () => {
+    const error = { response: { data: "Invalid credentials" } };
+
+    (users.useLogin as jest.Mock).mockImplementation(({ onError }) => ({
+      mutate: () => onError(error),
+      isPending: false,
+    }));
+
+    const { result } = renderHook(() => useLogin());
+
+    await act(async () => {
+      result.current.login();
+    });
+
+    expect(result.current.error).toBe("Invalid credentials");
   });
 });
