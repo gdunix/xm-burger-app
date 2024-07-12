@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { Ingredient } from "@/types";
-import createSelectors from "../createSelectors";
 import * as U from "./utils";
 
 type State = {
@@ -26,4 +25,4 @@ const useBurgerStore = create<State>()((set, get) => ({
 }));
 
 
-export default createSelectors(useBurgerStore);
+export default useBurgerStore;

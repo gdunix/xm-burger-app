@@ -5,6 +5,10 @@ import "@testing-library/jest-dom";
 
 import List from "./List";
 
+jest.mock("./ingredient", () => ({ name }: { name: string }) => (
+  <div data-testid={name} />
+));
+
 const mockIngredients: IngredientType[] = [
   { id: 1, name: "test-1", src: "test-1.png" },
   { id: 2, name: "test-2", src: "test-2.png" },
@@ -16,7 +20,7 @@ describe("List component", () => {
     renderWithTheme(<List ingredients={mockIngredients} />);
 
     mockIngredients.forEach((ingredient) => {
-      const ingredientElement = screen.getByText(`Add ${ingredient.name}`);
+      const ingredientElement = screen.getByTestId(ingredient.name);
       expect(ingredientElement).toBeInTheDocument();
     });
   });

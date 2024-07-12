@@ -6,7 +6,8 @@ type Props = {
 };
 
 const Private = ({ children }: Props) => {
-  const isAuthenticated = useAuth.use.isAuthenticated();
+  const { gteIsAuthenticated } = useAuth();
+  const isAuthenticated = gteIsAuthenticated();
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
   }
