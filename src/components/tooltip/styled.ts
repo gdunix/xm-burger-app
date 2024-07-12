@@ -32,7 +32,7 @@ type TooltipWrapperProps = {
 
 export const TooltipWrapper = styled.div<TooltipWrapperProps>`
   position: absolute;
-  top: -10px;
+  top: 10px;
   left: 160px;
   background-color: ${(props) => props.theme.colors.primary};
   padding: 8px;
