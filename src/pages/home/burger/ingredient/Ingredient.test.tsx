@@ -34,7 +34,6 @@ describe("Ingredient component", () => {
 
   const mockIngredient: IngredientType = {
     id: 1,
-    uniqueId: "unique-id-1",
     name: "Bacon",
     src: "bacon.png",
   };
@@ -66,6 +65,6 @@ describe("Ingredient component", () => {
     const buttonElement = screen.getByRole("button");
     await userEvent.click(buttonElement);
 
-    expect(mockRemoveIngredient).toHaveBeenCalledWith("unique-id-1");
+    expect(mockRemoveIngredient).toHaveBeenCalledWith(1);
   });
 });

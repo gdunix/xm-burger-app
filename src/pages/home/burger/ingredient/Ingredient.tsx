@@ -7,14 +7,13 @@ import BurgerImg from "../../components/burgerImg";
 
 const Ingredient: React.FC<IngredientType> = ({
   id,
-  uniqueId = "",
   name,
   src,
 }) => {
   const { removeIngredient, getIngredientCount } = useBurger();
   const count = getIngredientCount(id);
   const onClick = () => {
-    removeIngredient(uniqueId);
+    removeIngredient(id);
   };
   const info = `x ${count}`;
   return (

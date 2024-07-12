@@ -10,19 +10,21 @@ describe("Burger functions", () => {
         id: 1,
         src: "burger-patty.png",
         name: "burger patty",
-        uniqueId: "burger-patty-1",
       },
       {
         id: 2,
         src: "bacon.png",
         name: "bacon",
-        uniqueId: "bacon-1",
       },
       {
         id: 3,
         src: "egg.png",
         name: "egg",
-        uniqueId: "egg-1",
+      },
+      {
+        id: 1,
+        src: "burger-patty.png",
+        name: "burger patty",
       },
     ];
   });
@@ -36,12 +38,11 @@ describe("Burger functions", () => {
       };
       const updatedBurger = U.addIngredient(initialBurger, newIngredient);
 
-      expect(updatedBurger.length).toBe(4);
-      expect(updatedBurger[3].name).toBe("cheese");
-      expect(updatedBurger[3].uniqueId).toBe("cheese-1");
+      expect(updatedBurger.length).toBe(5);
+      expect(updatedBurger[4].name).toBe("cheese");
     });
 
-    it("should add another instance of an existing ingredient with a unique ID", () => {
+    it("should add another instance of an existing ingredient", () => {
       const existingIngredient: Ingredient = {
         id: 1,
         src: "burger-patty.png",
@@ -49,28 +50,37 @@ describe("Burger functions", () => {
       };
       const updatedBurger = U.addIngredient(initialBurger, existingIngredient);
 
-      expect(updatedBurger.length).toBe(4);
+      expect(updatedBurger.length).toBe(5);
       expect(updatedBurger[3].name).toBe("burger patty");
-      expect(updatedBurger[3].uniqueId).toBe("burger-patty-2");
     });
   });
 
   describe("removeIngredient", () => {
     it("should remove the specified ingredient from the burger", () => {
-      const uniqueIdToRemove = "bacon-1";
-      const updatedBurger = U.removeIngredient(initialBurger, uniqueIdToRemove);
+      const id = 2;
+      const updatedBurger = U.removeIngredient(initialBurger, id);
 
-      expect(updatedBurger.length).toBe(2);
+      expect(updatedBurger.length).toBe(3);
       expect(
-        updatedBurger.find((ing) => ing.uniqueId === uniqueIdToRemove)
+        updatedBurger.find((ing) => ing.id === id)
       ).toBeUndefined();
     });
 
-    it("should return the original burger if the uniqueId is not found", () => {
-      const uniqueIdToRemove = "unknown-unique-id";
-      const updatedBurger = U.removeIngredient(initialBurger, uniqueIdToRemove);
+    it("should remove the last occurence of an ingredient if it is already in the burger", () => {
+      const id = 1;
+      const updatedBurger = U.removeIngredient(initialBurger, id);
 
       expect(updatedBurger.length).toBe(3);
+      expect(
+        updatedBurger.find((ing) => ing.id === id)
+      ).not.toBeUndefined();
+    });
+
+    it("should return the original burger if the id is not found", () => {
+      const id = 100;
+      const updatedBurger = U.removeIngredient(initialBurger, id);
+
+      expect(updatedBurger.length).toBe(4);
     });
   });
 
@@ -93,7 +103,7 @@ describe("Burger functions", () => {
       const countBacon = U.getIngredientCount(initialBurger, 2);
       const countEgg = U.getIngredientCount(initialBurger, 3);
 
-      expect(countBurgerPatty).toBe(1);
+      expect(countBurgerPatty).toBe(2);
       expect(countBacon).toBe(1);
       expect(countEgg).toBe(1);
     });
@@ -117,7 +127,6 @@ describe("Burger functions", () => {
           id: 1,
           src: "burger-patty.png",
           name: "burger patty",
-          uniqueId: "burger-patty-1",
         },
       ];
       expect(U.getCost(oneIngredientBurger)).toBe(2.5);
